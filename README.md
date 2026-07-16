@@ -10,3 +10,5 @@ Validate startup ideas before you spend months building them.
 4. Open http://localhost:5173
 
 Two processes run together: Vite (frontend, port 5173) and Express (backend proxy, port 3001) which holds your API key and forwards requests to Gemini.
+
+_Last updated: 2026-07-16_

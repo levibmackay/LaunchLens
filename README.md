@@ -23,6 +23,29 @@ It's a single-page React app (all data lives in browser state, nothing is persis
 - **Backend**: a minimal Express server (`server.js`) that proxies chat requests to the Gemini API so the API key never reaches the browser.
 - **AI provider**: Google Gemini (`gemini-2.5-flash` via the Generative Language API).
 
+## Project structure
+
+```
+launchlens_v2/
+├── server.js          # Express proxy: holds GEMINI_API_KEY, forwards chat requests to Gemini
+├── vite.config.js      # Dev server on :5173, proxies /api to the Express server on :3001
+├── index.html
+└── src/
+    ├── main.jsx        # React entry point
+    └── App.jsx         # Entire application: theming, auth screen, dashboard, idea workspace, all views
+```
+
+There is no router, no global state library, and no database — `App.jsx` holds all UI and state (ideas, tasks, checklist items, interview notes, chat history) in React `useState`.
+
+## Environment variables
+
+Set these in `launchlens_v2/.env` (not committed):
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | Yes | Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey). Without it, `/api/claude` returns a 500 and AI features fail. |
+| `PORT` | No (defaults to 3001) | Port the Express proxy listens on. |
+
 ## Setup
 
 The app lives in `launchlens_v2/`.
